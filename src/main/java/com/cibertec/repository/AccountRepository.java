@@ -23,4 +23,8 @@ public interface AccountRepository extends MongoRepository<Account, Integer>{
 	
 	@Query(value =  "{ products: {$in : [ ?0 ] } }" , count = true)
 	public abstract Integer cuentaArrayProducto(String producto);
+	
+	@Query("{ products: {$in : [ ?0 ] } }")
+	public abstract List<Account> listaArrayVariosProducto(List<String> producto);
+	
 }

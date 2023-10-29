@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,12 @@ import com.cibertec.service.AccountService;
 @RequestMapping("/rest/accounts")
 public class AccountController {
 
+	//http://localhost:8092/rest/accounts
+	//http://localhost:8092/rest/accounts/porId/557378
+	//http://localhost:8092/rest/accounts/porLimit/9500-10500
+	//http://localhost:8092/rest/accounts/porProducto/Commodity
+	//http://localhost:8092/rest/accounts/cantidadPorProducto/Commodity
+	
 	@Autowired
 	private AccountService service;
 	
@@ -48,4 +55,14 @@ public class AccountController {
 	public Integer cantidadPorProducto(@PathVariable("producto") String producto){
 		return service.cuentaArrayProducto(producto);
 	}
+	
+	@GetMapping("/porVariosProductos")
+	@ResponseBody
+	public List<Account> porVariosProducto(@RequestBody List<String> productos){
+		return service.listaArrayVariosProducto(productos);
+	}
+	
+	
+	
+	
 }
